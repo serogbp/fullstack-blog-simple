@@ -1,0 +1,48 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Backend",
+			"program": "${workspaceFolder}/src/backend/index.ts",
+			"request": "launch",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"runtimeArgs": [
+				"./node_modules/nodemon/bin/nodemon.js"
+			],
+			"envFile": "${workspaceFolder}/src/backend/.env",
+			"type": "node"
+		},
+		{
+			"name": "ReactNPM",
+			"request": "launch",
+			"type": "node",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"start"
+			],
+			"cwd": "${workspaceFolder}/src/frontend"
+		},
+		{
+			"name": "ReactChrome",
+			"request": "launch",
+			"type": "chrome",
+			"url": "http://localhost:3001",
+			"webRoot": "${workspaceFolder}/src/frontend"
+		}
+	],
+	"compounds": [
+		{
+			"name": "React + Backend",
+			"configurations": [
+				"ReactNPM",
+				"ReactChrome",
+				"Backend"
+			]
+		}
+	]
+}
