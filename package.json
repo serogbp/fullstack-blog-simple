@@ -5,5 +5,8 @@
 	"workspaces": [
 		"src/backend"
 	],
-	"scripts": {}
+	"scripts": {},
+	"devDependencies": {
+		"@tsconfig/recommended": "^1.0.2"
+	}
 }
