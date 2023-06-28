@@ -2,6 +2,8 @@
 	"name": "fullstack-blog",
 	"private": true,
 	"version": "1.0.0",
-	"workspaces": [],
+	"workspaces": [
+		"src/backend"
+	],
 	"scripts": {}
 }
