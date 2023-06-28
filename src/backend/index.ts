@@ -1,15 +1,24 @@
 import express from "express";
-import dotenv from "dotenv";
+import config from "./env.js";
+import cors from "cors";
+import connect from "./database/mysql.js";
 
 const app = express();
-dotenv.config();
+app.use(cors());
 
-const port = process.env.PORT;
-
-app.get('/', (req, res) => {
-	res.send('Hello world');
+app.get("/", (req, res) => {
+	res.send("Hello world");
 });
 
-app.listen(port, () => {
-	console.log(`[server]: Server is running at http://localhost:${port}`);
+app.get("/post", async (req, res) => {
+	const connection = await connect();
+
+	const [rows, fields] = await connection.query("SELECT * FROM posts");
+	connection.end();
+
+	console.log(rows);
+});
+
+app.listen(config.port, () => {
+	console.log(`[server]: Server is running at http://localhost:${config.port}`);
 });
