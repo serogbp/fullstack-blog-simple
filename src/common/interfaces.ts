@@ -1,21 +1,21 @@
 export interface User {
-	id: number;
+	id: string;
 	email: string;
 	password: string | undefined;
 	created_at: string;
 }
 
 export interface Blog {
-	id: number;
-	user_id: number;
+	id: string;
+	user_id: string;
 	name: string;
 	description: string;
 	created_at: string;
 }
 
 export interface Post {
-	id: number;
-	blog_id: number;
+	id: string;
+	blog_id: string;
 	image_url: string;
 	title: string;
 	body: string;
@@ -27,6 +27,12 @@ export interface Post {
 }
 
 export interface Tag {
-	id: number;
+	id: string;
 	name: string;
+}
+
+export interface Token {
+	id: string;
+	email: string;
+	owned_blogs: string[];
 }

@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { GetPublicKeyOrSecret, Secret } from "jsonwebtoken";
 
 export interface Config {
 	port: string | undefined;
@@ -8,7 +9,7 @@ export interface Config {
 		password: string | undefined;
 		database: string | undefined;
 	};
-	jwt_token: string | undefined;
+	jwt_token: Secret | GetPublicKeyOrSecret;
 }
 
 dotenv.config();
@@ -21,7 +22,7 @@ const config: Config = {
 		password: process.env.PASSWORD,
 		database: process.env.DATABASE,
 	},
-	jwt_token: process.env.JWT_TOKEN,
+	jwt_token: process.env.JWT_TOKEN ?? "",
 };
 
 export default config;

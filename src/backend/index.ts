@@ -1,7 +1,6 @@
 import express from "express";
 import config from "./env.js";
 import cors from "cors";
-import connect from "./database/mysql.js";
 import postRouter from "./routes/post.route.ts";
 import tagRouter from "./routes/tag.route.ts";
 import blogRouter from "./routes/blog.route.ts";
