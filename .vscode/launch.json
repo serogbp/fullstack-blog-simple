@@ -29,6 +29,17 @@
 			"cwd": "${workspaceFolder}/src/frontend"
 		},
 		{
+			"name": "TailwindNPM",
+			"request": "launch",
+			"type": "node",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"run",
+				"tailwind"
+			],
+			"cwd": "${workspaceFolder}/src/frontend"
+		},
+		{
 			"name": "ReactChrome",
 			"request": "launch",
 			"type": "chrome",
@@ -41,6 +52,7 @@
 			"name": "React + Backend",
 			"configurations": [
 				"ReactNPM",
+				"TailwindNPM",
 				"ReactChrome",
 				"Backend"
 			]
