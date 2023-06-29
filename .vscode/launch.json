@@ -23,7 +23,8 @@
 			"type": "node",
 			"runtimeExecutable": "npm",
 			"runtimeArgs": [
-				"start"
+				"run",
+				"dev"
 			],
 			"cwd": "${workspaceFolder}/src/frontend"
 		},
@@ -31,7 +32,7 @@
 			"name": "ReactChrome",
 			"request": "launch",
 			"type": "chrome",
-			"url": "http://localhost:3001",
+			"url": "http://localhost:5173",
 			"webRoot": "${workspaceFolder}/src/frontend"
 		}
 	],
