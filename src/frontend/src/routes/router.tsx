@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import Landing from "./landing.route";
-import NotFound from "./not_found.route";
+import Landing from "./Landing";
+import NotFound from "./NotFound";
 import { getBlogs, getPosts } from "../services/api";
-import Blog from "./blog.route";
+import Blog from "./Blog";
 
 export enum ROUTES {
 	LANDING = "/",
