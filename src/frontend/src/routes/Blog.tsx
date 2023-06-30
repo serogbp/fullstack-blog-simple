@@ -1,12 +1,15 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 import { Post } from "../../../common/interfaces";
 
 export default function Blog() {
 	const data = useLoaderData() as Post[];
+	const location = useLocation();
 	return (
 		<>
 			{data.map((post) => (
-				<div key={post.id}>{post.title}</div>
+				<Link to={`${location.pathname}/${post.slug}`} key={post.id}>
+					{post.title}
+				</Link>
 			))}
 		</>
 	);

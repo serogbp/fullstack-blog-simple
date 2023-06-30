@@ -7,6 +7,7 @@ export interface User {
 
 export interface Blog {
 	id: string;
+	slug: string;
 	user_id: string;
 	name: string;
 	description: string;
@@ -21,7 +22,7 @@ export interface Post {
 	body: string;
 	publish_date: string;
 	excerpt: string;
-	url: string;
+	slug: string;
 	visibility: string;
 	created_at: string;
 }

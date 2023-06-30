@@ -7,7 +7,7 @@ export default function Landing() {
 	return (
 		<>
 			{data.map((blog) => (
-				<Link to={`/${blog.id}`} key={blog.id}>
+				<Link to={`/${blog.slug}`} key={blog.id}>
 					{blog.name}
 				</Link>
 			))}

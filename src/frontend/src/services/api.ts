@@ -11,11 +11,22 @@ export function getBlogs() {
 	});
 }
 
-export function getPosts(blog_id: string) {
-	return fetch(`${API}blog/${blog_id}`).then(async (res) => {
+export function getPosts(blog_slug: string) {
+	return fetch(`${API}blog/${blog_slug}`).then(async (res) => {
 		if (res.status === 200) {
 			const data = await res.json();
 			return data;
+		} else {
+			throw res;
+		}
+	});
+}
+
+export function getPost(blog_id: string, slug: string) {
+	return fetch(`${API}blog/${blog_id}/post/${slug}`).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data[0];
 		} else {
 			throw res;
 		}
