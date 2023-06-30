@@ -10,3 +10,14 @@ export function getBlogs() {
 		}
 	});
 }
+
+export function getPosts(blog_id: string) {
+	return fetch(`${API}blog/${blog_id}`).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data;
+		} else {
+			throw res;
+		}
+	});
+}

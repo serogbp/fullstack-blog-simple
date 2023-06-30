@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Blog } from "../../../common/interfaces";
 
 export default function Landing() {
@@ -7,7 +7,9 @@ export default function Landing() {
 	return (
 		<>
 			{data.map((blog) => (
-				<div key={blog.id}>{blog.name}</div>
+				<Link to={`/${blog.id}`} key={blog.id}>
+					{blog.name}
+				</Link>
 			))}
 		</>
 	);

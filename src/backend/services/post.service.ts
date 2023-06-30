@@ -2,17 +2,6 @@ import { Request, Response } from "express";
 import { Post } from "../../common/interfaces.ts";
 import { query } from "./db.service.ts";
 
-export async function getPosts(req: Request, res: Response) {
-	try {
-		const [rows] = await query("SELECT * FROM posts");
-		// TODO paginacion?
-		res.send(rows);
-	} catch (error) {
-		console.log(error);
-		res.sendStatus(500);
-	}
-}
-
 export async function getPost(req: Request, res: Response) {
 	try {
 		const [rows] = await query("SELECT * FROM posts WHERE id = ?", [req.params.id]);
