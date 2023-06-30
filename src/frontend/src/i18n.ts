@@ -8,6 +8,7 @@ const resources = {
 	es: {
 		translation: {
 			"Welcome to React": "Bienvenido a React y react-i18next",
+			"new post": "Nueva entrada",
 		},
 	},
 	en: {
