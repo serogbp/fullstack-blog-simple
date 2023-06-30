@@ -4,6 +4,7 @@ import NotFound from "./NotFound";
 import { getBlogs, getPost, getPosts } from "../services/api";
 import Blog from "./Blog";
 import Post from "./Post";
+import PostNew from "./PostNew";
 
 export enum ROUTES {
 	LANDING = "/",
@@ -26,21 +27,34 @@ const router = createBrowserRouter([
 		path: "/:blog_slug",
 		element: <Blog />,
 		loader: async ({ params }) => {
-			// TODO revisar el if
+			// TODO pasar a un fichero loaders
 			if (params.blog_slug) {
-				return getPosts(params.blog_slug);
+				const posts = await getPosts(params.blog_slug);
+				return posts;
 			}
+			throw new Response("", {
+				status: 404,
+				statusText: "Not Found",
+			});
 		},
 		errorElement: <NotFound />,
 	},
 	{
-		path: "/:blog_id/:post_slug",
+		path: "/:blog_slug/new-post",
+		element: <PostNew />,
+	},
+	{
+		path: "/:blog_slug/:post_slug",
 		element: <Post />,
 		loader: async ({ params }) => {
-			// TODO revisar el if
-			if (params.blog_id && params.post_slug) {
-				return getPost(params.blog_id, params.post_slug);
+			// TODO pasar a un fichero loaders
+			if (params.blog_slug && params.post_slug) {
+				return getPost(params.blog_slug, params.post_slug);
 			}
+			throw new Response("", {
+				status: 404,
+				statusText: "Not Found",
+			});
 		},
 		errorElement: <NotFound />,
 	},

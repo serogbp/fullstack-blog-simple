@@ -69,6 +69,9 @@ export async function getPost(req: Request, res: Response) {
 }
 
 export async function createPost(req: Request, res: Response) {
+	// TODO comprobar que existe el blog antes de la inserción
+	// TODO obtener blog_id a partir del body.blog_slug
+
 	const post: Post = req.body;
 	// TODO guardar tags
 	// req.body.post y req.body.tags

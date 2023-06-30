@@ -6,11 +6,13 @@ export default function Landing() {
 
 	return (
 		<>
-			{data.map((blog) => (
-				<Link to={`/${blog.slug}`} key={blog.id}>
-					{blog.name}
-				</Link>
-			))}
+			<div className="flex flex-col gap-4">
+				{data.map((blog) => (
+					<Link to={`/${blog.slug}`} key={blog.id}>
+						{blog.name}
+					</Link>
+				))}
+			</div>
 		</>
 	);
 }
