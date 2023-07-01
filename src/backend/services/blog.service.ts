@@ -14,6 +14,25 @@ export async function getBlogs(req: Request, res: Response) {
 	}
 }
 
+export async function getBlog(req: Request, res: Response) {
+	try {
+		const blog_slug = req.params.blog_slug;
+		const [rows] = await query(
+			`
+		SELECT *
+		FROM blogs
+		WHERE slug = ?;
+		`,
+			[blog_slug]
+		);
+		const blogs = rows as Blog[];
+		res.send(blogs[0]);
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+}
+
 export async function createBlog(req: Request, res: Response) {
 	const blog = req.body as Blog;
 	try {
@@ -48,10 +67,6 @@ export async function getPosts(req: Request, res: Response) {
 		console.log(error);
 		res.sendStatus(500);
 	}
-}
-
-interface PostResponse {
-	[index: string]: Post;
 }
 
 export async function getPost(req: MyRequest, res: Response) {

@@ -51,8 +51,19 @@ export function getBlogs() {
 	});
 }
 
-export function getPosts(blog_slug: string) {
+export function getBlog(blog_slug: string) {
 	return fetch(`${API}blog/${blog_slug}`).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data;
+		} else {
+			throw res;
+		}
+	});
+}
+
+export function getPosts(blog_slug: string) {
+	return fetch(`${API}blog/${blog_slug}/post`).then(async (res) => {
 		if (res.status === 200) {
 			const data = await res.json();
 			return data;
@@ -81,7 +92,7 @@ export function getPost(blog_id: string, slug: string) {
 }
 
 export function createPost(blog_slug: string, post: Post) {
-	return fetch(`${API}blog/${blog_slug}/post/${post.slug}`, {
+	return fetch(`${API}blog/${blog_slug}/post/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

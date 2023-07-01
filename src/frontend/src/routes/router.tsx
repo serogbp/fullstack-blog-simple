@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Landing from "./Landing";
 import NotFound from "./NotFound";
-import { getBlogs, getPost, getPosts } from "../services/api";
+import { getBlog, getBlogs, getPost, getPosts } from "../services/api";
 import Blog from "./Blog";
 import Post from "./Post";
 import PostNew from "./PostNew";
@@ -40,8 +40,13 @@ const router = createBrowserRouter([
 		loader: async ({ params }) => {
 			// TODO pasar a un fichero loaders
 			if (params.blog_slug) {
+				// TODO promise.all ?
 				const posts = await getPosts(params.blog_slug);
-				return posts;
+				const blog = await getBlog(params.blog_slug);
+				return {
+					blog,
+					posts,
+				};
 			}
 			throw new Response("", {
 				status: 404,

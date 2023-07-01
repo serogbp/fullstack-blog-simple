@@ -22,6 +22,10 @@ const resources = {
 			"login here": "Iniciar sesión aquí",
 			"edit post": "Editar entrada",
 			"delete post": "Eliminar entrada",
+			"create post": "Crear entrada",
+			"create blog": "Crear blog",
+			"edit blog": "Editar blog",
+			"delete blog": "Eliminar blog",
 		},
 	},
 	en: {
