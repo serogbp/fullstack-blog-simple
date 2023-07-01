@@ -22,6 +22,8 @@ blogRouter.route("/blog/:blog_slug/post/:post_slug")
 	// @ts-ignore
 	.get(getToken, getPost)
 	// TODO comprobar que es owner como en getPost
+	.post(createPost)
+	// TODO comprobar que es owner como en getPost
 	.patch(updatePost)
 	// TODO comprobar que es owner como en getPost
 	.delete(deletePost);

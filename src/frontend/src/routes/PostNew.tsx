@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Post } from "../../../common/interfaces";
 import slugify from "slugify";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../services/api";
 
 export default function PostNew() {
 	const params = useParams();
+	const navigate = useNavigate();
 
 	const [post, setPost] = useState<Post>({
 		title: "",
@@ -20,7 +21,9 @@ export default function PostNew() {
 		event.preventDefault();
 
 		// TODO handle errores fetch
-		createPost(params.blog_slug ?? "", post);
+		createPost(params.blog_slug ?? "", post).then(() => {
+			navigate(-1);
+		});
 	};
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +49,7 @@ export default function PostNew() {
 	return (
 		<div>
 			<h1>Nuevo Post</h1>
-			<form action="" method="post" onSubmit={handleSubmit} className="flex flex-col gap-4 bg-stone-200 p-4">
+			<form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-stone-200 p-4">
 				<div className="flex flex-col">
 					<label htmlFor="title">Title</label>
 					<input onChange={handleChange} value={post.title} type="text" name="title" />

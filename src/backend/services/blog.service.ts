@@ -34,8 +34,8 @@ export async function getBlog(req: Request, res: Response) {
 }
 
 export async function createBlog(req: Request, res: Response) {
-	const blog = req.body as Blog;
 	try {
+		const blog = req.body as Blog;
 		await query(
 			`
 			INSERT INTO blogs (user_id, slug, name, description)
@@ -105,14 +105,15 @@ export async function createPost(req: Request, res: Response) {
 	// TODO comprobar que existe el blog antes de la inserción
 	// TODO obtener blog_id a partir del body.blog_slug
 
-	const post: Post = req.body;
 	// TODO guardar tags
 	// req.body.post y req.body.tags
 	try {
+		const { blog_slug, post } = req.body;
+		const blog_id = await getBlogId(blog_slug);
 		await query(
 			`
 			INSERT INTO posts (blog_id, image_url, title, body, excerpt, slug, visibility) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-			[post.blog_id, post.image_url, post.title, post.body, post.excerpt, post.slug, post.visibility]
+			[blog_id, post.image_url, post.title, post.body, post.excerpt, post.slug, post.visibility]
 		);
 		res.sendStatus(200);
 	} catch (error) {
@@ -176,5 +177,22 @@ async function isBlogOwner(user_id: string, blog_slug: string, post_id: string) 
 	} catch (error) {
 		console.log(error);
 		return false;
+	}
+}
+
+async function getBlogId(blog_slug: string) {
+	try {
+		const [rows] = await query(
+			`
+		SELECT id
+		FROM blogs
+		WHERE slug = ?;
+		`,
+			[blog_slug]
+		);
+		return (rows as Blog[])[0].id;
+	} catch (error) {
+		console.log(error);
+		return null;
 	}
 }

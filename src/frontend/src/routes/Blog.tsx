@@ -22,8 +22,10 @@ export default function Blog() {
 				</Link>
 				<Button text={t("delete blog")} bg="bg-red-500" handleClick={() => {}} />
 			</div>
+
 			<h1 className="mb-2 text-4xl font-semibold">{blog.name}</h1>
 			<p className="max-w-prose">{blog.description}</p>
+
 			<div className="flex flex-col gap-4">
 				{posts.map((post) => (
 					<Link to={`${location.pathname}/${post.slug}`} key={post.id}>

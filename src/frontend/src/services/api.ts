@@ -97,7 +97,10 @@ export function createPost(blog_slug: string, post: Post) {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(post),
+		body: JSON.stringify({
+			blog_slug,
+			post,
+		}),
 	}).then(async (res) => {
 		if (res.status === 200) {
 		} else {
