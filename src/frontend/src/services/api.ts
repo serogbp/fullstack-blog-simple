@@ -1,4 +1,4 @@
-import { Post } from "../../../common/interfaces";
+import { Post, User } from "../../../common/interfaces";
 
 const API = "http://localhost:3001/";
 
@@ -22,16 +22,13 @@ export function login(email: string, password: string) {
 	});
 }
 
-export function signIn(email: string, password: string) {
+export function signIn(user: User) {
 	return fetch(`${API}sign-in`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({
-			email,
-			password,
-		}),
+		body: JSON.stringify(user),
 	}).then(async (res) => {
 		if (res.status === 200) {
 		} else {

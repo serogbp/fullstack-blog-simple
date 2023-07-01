@@ -10,12 +10,12 @@ import config from "../env.ts";
 
 export async function signIn(req: Request, res: Response) {
 	try {
-		const { email, password } = req.body;
+		const { email, password, username } = req.body;
 		const encryptedPassword = bcrypt.hashSync(password, 10);
 		await query(
 			`
-			INSERT INTO users (email, password) VALUES (?, ?) `,
-			[email, encryptedPassword]
+			INSERT INTO users (email, password, username) VALUES (?, ?, ?) `,
+			[email, encryptedPassword, username]
 		);
 		return res.sendStatus(200);
 	} catch (error) {

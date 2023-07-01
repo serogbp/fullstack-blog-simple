@@ -33,6 +33,7 @@ const resources = {
 			"generate slug": "Generar slug",
 			visibility: "Visibilidad",
 			image_url: "URL de la imagen",
+			username: "Nombre de usuario",
 		},
 	},
 	en: {

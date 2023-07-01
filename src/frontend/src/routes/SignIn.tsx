@@ -3,11 +3,13 @@ import Layout from "../layouts/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signIn } from "../services/api";
+import { User } from "../../../common/interfaces";
 
 export default function SignIn() {
-	const [form, setform] = useState({
+	const [form, setform] = useState<User>({
 		email: "",
 		password: "",
+		username: "",
 	});
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +23,7 @@ export default function SignIn() {
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
-		signIn(form.email, form.password).then(() => {
+		signIn(form).then(() => {
 			// TODO contemplar errores
 			navigate("/login");
 		});
@@ -40,17 +42,24 @@ export default function SignIn() {
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 					<form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
 						<div>
+							<label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+								{t("username")}
+							</label>
+							<input value={form.username} onChange={handleChange} id="username" name="username" type="text" required className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+						</div>
+
+						<div>
 							<label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
 								{t("email")}
 							</label>
-							<input value={form.email} onChange={handleChange} id="email" name="email" type="email" autoComplete="email" required className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+							<input value={form.email} onChange={handleChange} id="email" name="email" type="email" autoComplete="off" required className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 						</div>
 
 						<div>
 							<label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
 								{t("password")}
 							</label>
-							<input value={form.password} onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+							<input value={form.password} onChange={handleChange} id="password" name="password" type="password" autoComplete="off" required className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 						</div>
 
 						<div>
