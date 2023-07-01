@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createBlog, createPost, deletePost, getBlog, getBlogs, getPost, getPosts, updatePost } from "../services/blog.service.ts";
+import { createPost, deletePost, getBlog, getBlogs, getPost, getPosts, updatePost } from "../services/blog.service.ts";
 import { getToken } from "../middlewares/jwt.middleware.ts";
 
 const blogRouter = Router();
@@ -7,7 +7,6 @@ const blogRouter = Router();
 // prettier-ignore
 blogRouter.route("/blog")
 	.get(getBlogs)
-	.post(createBlog);
 
 blogRouter.route("/blog/:blog_slug").get(getBlog);
 

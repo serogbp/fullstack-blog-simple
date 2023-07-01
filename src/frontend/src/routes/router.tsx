@@ -1,23 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Landing from "./Landing";
 import NotFound from "./NotFound";
-import { getBlog, getBlogs, getPost, getPosts } from "../services/api";
+import { getBlog, getBlogs, getBlogsFromUsername, getPost, getPosts, getUser } from "../services/api";
 import Blog from "./Blog";
 import Post from "./Post";
 import PostNew from "./PostNew";
 import Login from "./Login";
 import SignIn from "./SignIn";
 import PostEdit from "./PostEdit";
-
-export enum ROUTES {
-	LANDING = "/",
-	BLOG_FEED = "/:blog_id",
-	LOGIN = "/login",
-	REGISTER = "/register",
-	POST = "/:blog_id/:post_id",
-	POST_EDIT = "/post/:post_id/edit",
-	POST_NEW = "/post/new",
-}
+import User from "./User";
 
 const router = createBrowserRouter([
 	{
@@ -33,6 +24,19 @@ const router = createBrowserRouter([
 	{
 		path: "/sign-in",
 		element: <SignIn />,
+	},
+	{
+		path: "/user/:username",
+		element: <User />,
+		loader: async ({ params }) => {
+			const blogs = await getBlogsFromUsername(params.username ?? "");
+			const user = await getUser(params.username ?? "");
+			return {
+				blogs,
+				user,
+			};
+		},
+		errorElement: <NotFound />,
 	},
 	{
 		path: "/:blog_slug",

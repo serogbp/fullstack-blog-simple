@@ -34,6 +34,10 @@ const resources = {
 			visibility: "Visibilidad",
 			image_url: "URL de la imagen",
 			username: "Nombre de usuario",
+			"not found": "No encontrado",
+			"error 404": "Error 404",
+			"your blogs": "Tus blogs",
+			"user blogs": "Blogs de {{user}}",
 		},
 	},
 	en: {

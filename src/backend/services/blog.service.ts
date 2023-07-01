@@ -33,22 +33,6 @@ export async function getBlog(req: Request, res: Response) {
 	}
 }
 
-export async function createBlog(req: Request, res: Response) {
-	try {
-		const blog = req.body as Blog;
-		await query(
-			`
-			INSERT INTO blogs (user_id, slug, name, description)
-			VALUES (?, ?, ?, ?);`,
-			[blog.user_id, blog.slug, blog.name, blog.description]
-		);
-		res.sendStatus(200);
-	} catch (error) {
-		console.log(error);
-		res.sendStatus(500);
-	}
-}
-
 export async function getPosts(req: Request, res: Response) {
 	const blog_slug = req.params.blog_slug;
 	try {

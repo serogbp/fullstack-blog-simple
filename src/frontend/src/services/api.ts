@@ -48,6 +48,27 @@ export function getBlogs() {
 	});
 }
 
+export function getBlogsFromUsername(username: string) {
+	return fetch(`${API}user/${username}/blog`).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data;
+		} else {
+			throw res;
+		}
+	});
+}
+export function getUser(username: string) {
+	return fetch(`${API}user/${username}`).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data;
+		} else {
+			throw res;
+		}
+	});
+}
+
 export function getBlog(blog_slug: string) {
 	return fetch(`${API}blog/${blog_slug}`).then(async (res) => {
 		if (res.status === 200) {
