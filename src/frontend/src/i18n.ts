@@ -26,6 +26,13 @@ const resources = {
 			"create blog": "Crear blog",
 			"edit blog": "Editar blog",
 			"delete blog": "Eliminar blog",
+			title: "Título",
+			body: "Contenido",
+			excerpt: "Resumen",
+			slug: "Slug",
+			"generate slug": "Generar slug",
+			visibility: "Visibilidad",
+			image_url: "URL de la imagen",
 		},
 	},
 	en: {
