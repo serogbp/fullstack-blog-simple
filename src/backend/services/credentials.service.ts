@@ -1,18 +1,21 @@
 import { Request, Response } from "express";
-import { query } from "./db.service";
+
 import { RowDataPacket } from "mysql2";
 import bcrypt from "bcrypt";
-import { Token } from "../../common/interfaces";
-import jwt from "jsonwebtoken";
-import config from "../env";
 
-export async function register(req: Request, res: Response) {
+import jwt from "jsonwebtoken";
+import { query } from "./db.service.ts";
+import { Token } from "../../common/interfaces.ts";
+import config from "../env.ts";
+
+export async function signIn(req: Request, res: Response) {
 	try {
 		const { email, password } = req.body;
+		const encryptedPassword = bcrypt.hashSync(password, 10);
 		await query(
 			`
 			INSERT INTO users (email, password) VALUES (?, ?) `,
-			[email, password]
+			[email, encryptedPassword]
 		);
 		return res.sendStatus(200);
 	} catch (error) {
@@ -38,6 +41,8 @@ export async function login(req: Request, res: Response) {
 			const token = jwt.sign(tokenData, secret);
 
 			return res.status(200).json(token);
+		} else {
+			return res.sendStatus(401);
 		}
 	} catch (error) {
 		console.log(error);

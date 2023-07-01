@@ -5,6 +5,8 @@ import { getBlogs, getPost, getPosts } from "../services/api";
 import Blog from "./Blog";
 import Post from "./Post";
 import PostNew from "./PostNew";
+import Login from "./Login";
+import SignIn from "./SignIn";
 
 export enum ROUTES {
 	LANDING = "/",
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
 		element: <Landing />,
 		loader: getBlogs,
 		errorElement: <NotFound />,
+	},
+	{
+		path: "/login",
+		element: <Login />,
+	},
+	{
+		path: "/sign-in",
+		element: <SignIn />,
 	},
 	{
 		path: "/:blog_slug",

@@ -9,6 +9,17 @@ const resources = {
 		translation: {
 			"Welcome to React": "Bienvenido a React y react-i18next",
 			"new post": "Nueva entrada",
+			login: "Iniciar sesión",
+			logout: "Cerrar sesión",
+			"login in to your account": "Iniciar sesión en tu cuenta",
+			"create new account": "Crear nueva cuenta",
+			"create account": "Crear cuenta",
+			email: "Correo electrónico",
+			password: "Contraseña",
+			"already member": "¿Ya tienes una cuenta?",
+			"not member": "¿No tienes una cuenta?",
+			"sign up here": "Regístrate aquí",
+			"login here": "Iniciar sesión aquí",
 		},
 	},
 	en: {

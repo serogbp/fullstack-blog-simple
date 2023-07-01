@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { login, register } from "../services/credentials.service";
+import { login, signIn } from "../services/credentials.service.ts";
 
-const userRouter = Router();
+const credentialsRouter = Router();
 
-userRouter.route("/login").post(login);
-userRouter.route("/register").post(register);
+credentialsRouter.route("/login").post(login);
+credentialsRouter.route("/sign-in").post(signIn);
 
-export default userRouter;
+export default credentialsRouter;

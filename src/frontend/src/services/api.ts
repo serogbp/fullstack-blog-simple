@@ -2,6 +2,44 @@ import { Post } from "../../../common/interfaces";
 
 const API = "http://localhost:3001/";
 
+export function login(email: string, password: string) {
+	return fetch(`${API}login`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			email,
+			password,
+		}),
+	}).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data;
+		} else {
+			throw res;
+		}
+	});
+}
+
+export function signIn(email: string, password: string) {
+	return fetch(`${API}sign-in`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			email,
+			password,
+		}),
+	}).then(async (res) => {
+		if (res.status === 200) {
+		} else {
+			throw res;
+		}
+	});
+}
+
 export function getBlogs() {
 	return fetch(`${API}blog`).then(async (res) => {
 		if (res.status === 200) {

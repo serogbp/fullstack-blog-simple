@@ -26,7 +26,6 @@ export default function PostNew() {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const inputName = event.target.name;
 		const inputValue = event.target.value;
-
 		setPost({
 			...post,
 			[inputName]: inputValue,
