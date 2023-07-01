@@ -35,5 +35,4 @@ export interface Tag {
 export interface Token {
 	id: string;
 	email: string;
-	owned_blogs: string[];
 }

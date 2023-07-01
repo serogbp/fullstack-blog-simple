@@ -31,11 +31,9 @@ export async function login(req: Request, res: Response) {
 		const user = (rows as RowDataPacket[])[0];
 
 		if (user && bcrypt.compareSync(password, user.password)) {
-			const userBlogs = await getUserBlogs(user.id);
 			const tokenData: Token = {
 				id: user.id,
 				email: user.email,
-				owned_blogs: userBlogs as string[],
 			};
 			const secret = config.jwt_token.toString();
 			const token = jwt.sign(tokenData, secret);
@@ -47,23 +45,5 @@ export async function login(req: Request, res: Response) {
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
-	}
-}
-
-async function getUserBlogs(user_id: string) {
-	try {
-		const [rows] = await query(
-			`
-			SELECT b.name, b.description
-			FROM blogs b
-			JOIN users u ON b.user_id = u.id
-			WHERE u.id = ?;
-		`,
-			[user_id]
-		);
-		return (rows as RowDataPacket[]).map((row) => row.toString());
-	} catch (error) {
-		console.log(error);
-		throw Error("No se pudo obtener los blogs del usuario intentando logearse");
 	}
 }

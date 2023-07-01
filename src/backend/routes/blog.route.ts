@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createBlog, createPost, deletePost, getBlogs, getPost, getPosts, updatePost } from "../services/blog.service.ts";
+import { getToken } from "../middlewares/jwt.middleware.ts";
 
 const blogRouter = Router();
 
@@ -15,7 +16,9 @@ blogRouter.route("/blog/:blog_slug")
 
 // prettier-ignore
 blogRouter.route("/blog/:blog_slug/post/:post_slug")
-	.get(getPost)
+	// TODO revisar
+	// @ts-ignore
+	.get(getToken, getPost)
 	.patch(updatePost)
 	.delete(deletePost);
 

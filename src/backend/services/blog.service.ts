@@ -1,6 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { query } from "./db.service.ts";
-import { Blog, Post } from "../../common/interfaces.ts";
+import { Blog, Post, Token } from "../../common/interfaces.ts";
+import { MyRequest } from "../interfaces-backend.ts";
 
 export async function getBlogs(req: Request, res: Response) {
 	try {
@@ -49,8 +50,14 @@ export async function getPosts(req: Request, res: Response) {
 	}
 }
 
-export async function getPost(req: Request, res: Response) {
+interface PostResponse {
+	[index: string]: Post;
+}
+
+export async function getPost(req: MyRequest, res: Response) {
 	try {
+		//TODO optimizacion Promise.All
+		// Guardar la query en variable, si el token no es nulo, lanzar la query y isBlogOwner en un Promise.All
 		const [rows] = await query(
 			`
 		SELECT p.*
@@ -61,7 +68,18 @@ export async function getPost(req: Request, res: Response) {
 		`,
 			[req.params.blog_slug, req.params.post_slug]
 		);
-		res.send(rows);
+		const posts = rows as Post[];
+		const post = posts[0];
+
+		const token = req.decoded as Token;
+
+		const isOwner = token ? await isBlogOwner(token.id, req.params.blog_slug, post.id ?? "") : false;
+
+		const response = {
+			post: post,
+			isOwner: isOwner,
+		};
+		res.send(response);
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -112,5 +130,24 @@ export async function deletePost(req: Request, res: Response) {
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
+	}
+}
+
+async function isBlogOwner(user_id: string, blog_slug: string, post_id: string) {
+	try {
+		const [rows] = await query(
+			`
+		SELECT b.user_id
+		FROM blogs b
+		JOIN posts p ON b.id = p.blog_id
+		WHERE p.id = ? AND b.slug = ? AND b.user_id = ?;
+		`,
+			[post_id, blog_slug, user_id]
+		);
+
+		return Array.isArray(rows) && rows.length > 0;
+	} catch (error) {
+		console.log(error);
+		return false;
 	}
 }
