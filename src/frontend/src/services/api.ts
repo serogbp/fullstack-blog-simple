@@ -81,12 +81,42 @@ export function getPost(blog_id: string, slug: string) {
 }
 
 export function createPost(blog_slug: string, post: Post) {
-	return fetch(`${API}blog/${blog_slug}`, {
+	return fetch(`${API}blog/${blog_slug}/post/${post.slug}`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(post),
+	}).then(async (res) => {
+		if (res.status === 200) {
+		} else {
+			throw res;
+		}
+	});
+}
+
+export function updatePost(blog_slug: string, post: Post) {
+	return fetch(`${API}blog/${blog_slug}/post/${post.slug}`, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post),
+	}).then(async (res) => {
+		if (res.status === 200) {
+		} else {
+			throw res;
+		}
+	});
+}
+
+export function deletePost(blog_slug: string, post_slug: string) {
+	return fetch(`${API}blog/${blog_slug}/post/${post_slug}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ blog_slug, post_slug }),
 	}).then(async (res) => {
 		if (res.status === 200) {
 		} else {

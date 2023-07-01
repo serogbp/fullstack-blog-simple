@@ -7,6 +7,7 @@ import Post from "./Post";
 import PostNew from "./PostNew";
 import Login from "./Login";
 import SignIn from "./SignIn";
+import PostEdit from "./PostEdit";
 
 export enum ROUTES {
 	LANDING = "/",
@@ -67,6 +68,20 @@ const router = createBrowserRouter([
 			});
 		},
 		errorElement: <NotFound />,
+	},
+	{
+		path: "/:blog_slug/:post_slug/edit",
+		element: <PostEdit />,
+		loader: async ({ params }) => {
+			// TODO pasar a un fichero loaders
+			if (params.blog_slug && params.post_slug) {
+				return getPost(params.blog_slug, params.post_slug);
+			}
+			throw new Response("", {
+				status: 404,
+				statusText: "Not Found",
+			});
+		},
 	},
 ]);
 

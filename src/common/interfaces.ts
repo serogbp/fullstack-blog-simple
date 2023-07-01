@@ -36,3 +36,8 @@ export interface Token {
 	id: string;
 	email: string;
 }
+
+export interface PostResponse {
+	post: Post;
+	isOwner: boolean;
+}

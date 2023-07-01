@@ -124,7 +124,19 @@ export async function updatePost(req: Request, res: Response) {
 
 export async function deletePost(req: Request, res: Response) {
 	try {
-		await query("DELETE FROM posts WHERE id = ?", [req.params.id]);
+		const { blog_slug, post_slug } = req.body;
+		await query(
+			`
+		DELETE FROM posts
+		WHERE id IN (
+			SELECT p.id
+			FROM posts p
+			JOIN blogs b ON p.blog_id = b.id
+			WHERE b.slug = ? AND p.slug = ?
+		);
+		`,
+			[blog_slug, post_slug]
+		);
 		res.sendStatus(200);
 		// TODO borrar imagenes relacionadas con ese post
 	} catch (error) {

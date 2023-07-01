@@ -20,6 +20,8 @@ const resources = {
 			"not member": "¿No tienes una cuenta?",
 			"sign up here": "Regístrate aquí",
 			"login here": "Iniciar sesión aquí",
+			"edit post": "Editar entrada",
+			"delete post": "Eliminar entrada",
 		},
 	},
 	en: {

@@ -19,7 +19,9 @@ blogRouter.route("/blog/:blog_slug/post/:post_slug")
 	// TODO revisar
 	// @ts-ignore
 	.get(getToken, getPost)
+	// TODO comprobar que es owner
 	.patch(updatePost)
+	// TODO comprobar que es owner
 	.delete(deletePost);
 
 export default blogRouter;
