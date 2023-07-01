@@ -69,6 +69,26 @@ export function getUser(username: string) {
 	});
 }
 
+export function getUserLoggedIn() {
+	const token = localStorage.getItem("token");
+	if (token) {
+		return fetch(`${API}user/logged-in`, {
+			headers: {
+				Authorization: localStorage.getItem("token") ?? "",
+			},
+		}).then(async (res) => {
+			if (res.status === 200) {
+				const data = await res.json();
+				return data;
+			} else {
+				throw res;
+			}
+		});
+	} else {
+		return null;
+	}
+}
+
 export function getBlog(blog_slug: string) {
 	return fetch(`${API}blog/${blog_slug}`).then(async (res) => {
 		if (res.status === 200) {

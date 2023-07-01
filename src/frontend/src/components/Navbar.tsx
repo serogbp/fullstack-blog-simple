@@ -1,16 +1,28 @@
-import { Fragment } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { Avatar } from "@mantine/core";
 import { useTranslation } from "react-i18next";
+import { User } from "../../../common/interfaces";
+
+interface Props {
+	user: User;
+}
 
 function classNames(...classes: any[]) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar(props: Props) {
 	const { t } = useTranslation();
+
+	const [user, setUser] = useState<User>(props.user);
+
+	useEffect(() => {
+		console.log(user);
+	});
+
 	return (
 		<Disclosure as="nav" className="bg-gray-800">
 			{({ open }) => (
@@ -25,7 +37,7 @@ export default function Navbar() {
 								</Disclosure.Button>
 							</div>
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-								<Link to={"/"} className="flex flex-shrink-0 items-center ">
+								<Link to={"/landing"} className="flex flex-shrink-0 items-center ">
 									<img className="block h-8 w-auto lg:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=violet&shade=500" alt="Your Company" />
 									<img className="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=violet&shade=500" alt="Your Company" />
 								</Link>
@@ -43,9 +55,9 @@ export default function Navbar() {
 										<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 											<Menu.Item>
 												{({ active }) => (
-													<a href="#" className={classNames(active ? "bg-gray-100" : "", "block px-4 py-2 text-sm text-gray-700")}>
+													<Link to={`/user/${user.username}`} className={classNames(active ? "bg-gray-100" : "", "block px-4 py-2 text-sm text-gray-700")}>
 														{t("your blogs")}
-													</a>
+													</Link>
 												)}
 											</Menu.Item>
 											<Menu.Item>

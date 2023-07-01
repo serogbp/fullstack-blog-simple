@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { query } from "./db.service.ts";
-import { Blog, User } from "../../common/interfaces.ts";
+import { Blog, Token, User } from "../../common/interfaces.ts";
+import { MyRequest } from "../interfaces-backend.ts";
 
 export async function createBlog(req: Request, res: Response) {
 	try {
@@ -45,6 +46,25 @@ export async function getUser(req: Request, res: Response) {
 			WHERE username = ?;
 			`,
 			[req.params.username]
+		);
+		const user = (rows as User[])[0];
+		res.send(user);
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+}
+
+export async function getUserLoggedIn(req: MyRequest, res: Response) {
+	try {
+		const token = req.decoded as Token;
+		const [rows] = await query(
+			`
+			SELECT id, username, email, created_at
+			FROM users
+			WHERE username = ?;
+			`,
+			[token.username]
 		);
 		const user = (rows as User[])[0];
 		res.send(user);

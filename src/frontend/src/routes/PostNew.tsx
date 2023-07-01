@@ -51,7 +51,7 @@ export default function PostNew() {
 	};
 
 	return (
-		<Layout>
+		<>
 			<h1 className="mb-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{t("create post")}</h1>
 			<div className="flex w-full max-w-lg flex-col gap-4 rounded-md bg-white p-6">
 				<div className="flex flex-col">
@@ -80,6 +80,6 @@ export default function PostNew() {
 					<Button text={t("create post")} handleClick={handleSubmit} />
 				</div>
 			</div>
-		</Layout>
+		</>
 	);
 }

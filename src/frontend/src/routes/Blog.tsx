@@ -12,7 +12,7 @@ export default function Blog() {
 	const { t } = useTranslation();
 
 	return (
-		<Layout>
+		<>
 			<div className="mb-4 flex gap-4">
 				<Link to={`${location.pathname}/new-post`}>
 					<Button text={t("new post")} />
@@ -33,6 +33,6 @@ export default function Blog() {
 					</Link>
 				))}
 			</div>
-		</Layout>
+		</>
 	);
 }

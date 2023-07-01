@@ -15,7 +15,7 @@ export default function Post() {
 	const { t } = useTranslation();
 	const { post, isOwner } = data;
 	return (
-		<Layout>
+		<>
 			{/* Si el usuario es dueño del blog, aparece boton editar */}
 			{isOwner && (
 				<div className="mb-4 flex gap-4">
@@ -44,6 +44,6 @@ export default function Post() {
 				</div>
 				<p>{post.body}</p>
 			</div>
-		</Layout>
+		</>
 	);
 }

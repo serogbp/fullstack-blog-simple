@@ -34,6 +34,7 @@ export async function login(req: Request, res: Response) {
 			const tokenData: Token = {
 				id: user.id,
 				email: user.email,
+				username: user.username,
 			};
 			const secret = config.jwt_token.toString();
 			const token = jwt.sign(tokenData, secret);

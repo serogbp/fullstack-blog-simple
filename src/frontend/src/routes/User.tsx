@@ -9,7 +9,7 @@ export default function User() {
 	const { t } = useTranslation();
 	const { user, blogs } = data;
 	return (
-		<Layout>
+		<>
 			<div className="flex flex-col gap-4">
 				<h2 className="text-3xl font-semibold">{t("user blogs", { user: user.username })}</h2>
 
@@ -19,6 +19,6 @@ export default function User() {
 					</Link>
 				))}
 			</div>
-		</Layout>
+		</>
 	);
 }
