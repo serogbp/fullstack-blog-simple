@@ -68,7 +68,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/:blog_slug/new-post",
-				element: <PostNew />,
+				element: <PostEdit />,
 			},
 			{
 				path: "/:blog_slug/:post_slug",
@@ -77,11 +77,7 @@ const router = createBrowserRouter([
 					// TODO pasar a un fichero loaders
 					if (params.blog_slug && params.post_slug) {
 						return getPost(params.blog_slug, params.post_slug);
-					}
-					throw new Response("", {
-						status: 404,
-						statusText: "Not Found",
-					});
+					} else return null;
 				},
 				errorElement: <NotFound />,
 			},

@@ -38,6 +38,10 @@ const resources = {
 			"error 404": "Error 404",
 			"your blogs": "Tus blogs",
 			"user blogs": "Blogs de {{user}}",
+			"featured image": "Imagen destacada",
+			"DropZoneImage title": "Arrastre la imagen destacada aquí o haga clic para seleccionar el archivo",
+			"DropZoneImage description": "El archivo no debe superar los 5mb",
+			"DropZoneImage not compatible": "El archivo no compatible o tamaño excede el máximo permitido",
 		},
 	},
 	en: {

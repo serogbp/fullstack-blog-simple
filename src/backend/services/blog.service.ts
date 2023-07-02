@@ -92,12 +92,12 @@ export async function createPost(req: Request, res: Response) {
 	// TODO guardar tags
 	// req.body.post y req.body.tags
 	try {
-		const { blog_slug, post } = req.body;
-		const blog_id = await getBlogId(blog_slug);
+		const body = req.body;
+		const blog_id = await getBlogId(body.blog_slug);
 		await query(
 			`
 			INSERT INTO posts (blog_id, image_url, title, body, excerpt, slug, visibility) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-			[blog_id, post.image_url, post.title, post.body, post.excerpt, post.slug, post.visibility]
+			[blog_id, body.image_url, body.title, body.body, body.excerpt, body.slug, body.visibility]
 		);
 		res.sendStatus(200);
 	} catch (error) {

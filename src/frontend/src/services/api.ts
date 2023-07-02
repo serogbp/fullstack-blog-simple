@@ -129,16 +129,11 @@ export function getPost(blog_id: string, slug: string) {
 	});
 }
 
-export function createPost(blog_slug: string, post: Post) {
+export function createPost(blog_slug: string, formData: FormData) {
 	return fetch(`${API}blog/${blog_slug}/post/`, {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			blog_slug,
-			post,
-		}),
+
+		body: formData,
 	}).then(async (res) => {
 		if (res.status === 200) {
 		} else {
@@ -147,13 +142,13 @@ export function createPost(blog_slug: string, post: Post) {
 	});
 }
 
-export function updatePost(blog_slug: string, post: Post) {
-	return fetch(`${API}blog/${blog_slug}/post/${post.slug}`, {
+export function updatePost(blog_slug: string, post_slug: string, formData: FormData) {
+	return fetch(`${API}blog/${blog_slug}/post/${post_slug}`, {
 		method: "PATCH",
 		headers: {
-			"Content-Type": "application/json",
+			"Content-Type": "multipart/form-data",
 		},
-		body: JSON.stringify(post),
+		body: formData,
 	}).then(async (res) => {
 		if (res.status === 200) {
 		} else {

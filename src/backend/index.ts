@@ -10,6 +10,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/image", express.static("./public/image"));
+
 app.use("/", blogRouter);
 app.use("/", userRouter);
 app.use("/", tagRouter);
