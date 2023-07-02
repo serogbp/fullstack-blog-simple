@@ -14,12 +14,9 @@ export function DropZoneImage(props: Props) {
 
 	const [files, setFiles] = useState<File[]>([]);
 
-	useEffect(() => {
-		props.onDrop(files);
-	}, files);
-
 	const onDrop = (files: File[]) => {
 		console.log("accepted files", files);
+		props.onDrop(files);
 		setFiles(files);
 	};
 

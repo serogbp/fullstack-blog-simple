@@ -12,7 +12,7 @@ import { FORM_DATA } from "../../../common/enums.ts";
 export default function PostEdit() {
 	const params = useParams();
 	const navigate = useNavigate();
-	const data = useLoaderData() as Post;
+	const { isOwner, post: data } = useLoaderData() as { isOwner: boolean; post: Post };
 	const { t } = useTranslation();
 
 	const [post, setPost] = useState<Post>(
@@ -39,8 +39,8 @@ export default function PostEdit() {
 
 		if (featuredImage !== null && featuredImage !== undefined) {
 			const imageDataUrl = await readFileAsDataURL(featuredImage);
-			const blog = dataURLToBlob(imageDataUrl);
-			formData.append(FORM_DATA.IMAGE, blog);
+			const blob = dataURLToBlob(imageDataUrl);
+			formData.append(FORM_DATA.IMAGE, blob);
 		}
 
 		if (editMode) {
