@@ -1,6 +1,7 @@
 import { Post, User } from "../../../common/interfaces";
 
 const API = "http://localhost:3001/";
+export const API_IMAGE = "http://localhost:3001/image/";
 
 export function login(email: string, password: string) {
 	return fetch(`${API}login`, {

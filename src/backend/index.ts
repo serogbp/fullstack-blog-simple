@@ -10,7 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/image", express.static("./public/image"));
+app.use(express.static("/"));
+const url = new URL("./public/image", import.meta.url);
+const imagePath = url.pathname.substring(1);
+app.use("/image", express.static(imagePath));
 
 app.use("/", blogRouter);
 app.use("/", userRouter);
