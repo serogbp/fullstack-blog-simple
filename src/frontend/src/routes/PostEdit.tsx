@@ -36,6 +36,7 @@ export default function PostEdit() {
 		formData.append("slug", post.slug);
 		formData.append("visibility", post.visibility);
 		formData.append("blog_slug", params.blog_slug ?? "");
+		formData.append("image_url", post.image_url ?? "");
 
 		if (featuredImage !== null && featuredImage !== undefined) {
 			const imageDataUrl = await readFileAsDataURL(featuredImage);
