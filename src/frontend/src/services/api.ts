@@ -133,7 +133,6 @@ export function getPost(blog_id: string, slug: string) {
 export function createPost(blog_slug: string, formData: FormData) {
 	return fetch(`${API}blog/${blog_slug}/post/`, {
 		method: "POST",
-
 		body: formData,
 	}).then(async (res) => {
 		if (res.status === 200) {
@@ -146,9 +145,6 @@ export function createPost(blog_slug: string, formData: FormData) {
 export function updatePost(blog_slug: string, post_slug: string, formData: FormData) {
 	return fetch(`${API}blog/${blog_slug}/post/${post_slug}`, {
 		method: "PATCH",
-		headers: {
-			"Content-Type": "multipart/form-data",
-		},
 		body: formData,
 	}).then(async (res) => {
 		if (res.status === 200) {

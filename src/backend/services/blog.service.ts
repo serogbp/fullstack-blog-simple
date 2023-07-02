@@ -107,13 +107,18 @@ export async function createPost(req: Request, res: Response) {
 }
 
 export async function updatePost(req: Request, res: Response) {
-	const post: Post = req.body;
 	// TODO guardar tags
 	try {
+		const post = req.body;
 		query(
 			`
-			UPDATE posts SET image_url=?, title=?, body=?, excerpt=?, slug=?, visibility=? WHERE id=?`,
-			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.visibility, post.id]
+			UPDATE posts SET image_url=?, title=?, body=?, excerpt=?, slug=?, visibility=?
+			WHERE blog_id = (
+				SELECT id
+				FROM blogs
+				WHERE slug = ?
+			) AND slug = ?;`,
+			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.visibility, post.blog_slug, post.slug]
 		);
 		res.sendStatus(200);
 	} catch (error) {
