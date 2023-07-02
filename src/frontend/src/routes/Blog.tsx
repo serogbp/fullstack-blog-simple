@@ -6,8 +6,7 @@ import Button from "../components/Button";
 import { useTranslation } from "react-i18next";
 
 export default function Blog() {
-	const data = useLoaderData() as { blog: Blog; posts: Post[] };
-	const { blog, posts } = data;
+	const data = useLoaderData() as Post[];
 	const location = useLocation();
 	const { t } = useTranslation();
 
@@ -23,11 +22,11 @@ export default function Blog() {
 				<Button text={t("delete blog")} bg="bg-red-500" handleClick={() => {}} />
 			</div>
 
-			<h1 className="mb-2 text-4xl font-semibold">{blog.name}</h1>
-			<p className="max-w-prose">{blog.description}</p>
+			{/* <h1 className="mb-2 text-4xl font-semibold">{blog.name}</h1>
+			<p className="max-w-prose">{blog.description}</p> */}
 
 			<div className="flex flex-col gap-4">
-				{posts.map((post) => (
+				{data.map((post) => (
 					<Link to={`${location.pathname}/${post.slug}`} key={post.id}>
 						<CardPost post={post} />
 					</Link>
