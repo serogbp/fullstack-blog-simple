@@ -3,7 +3,9 @@ import path from "path";
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
+		// CommonJS
 		// const destinationPath = path.join(__dirname, "../public/image/");
+		// ES Modules
 		const url = new URL("../public/image", import.meta.url);
 		cb(null, url.pathname.substring(1));
 	},

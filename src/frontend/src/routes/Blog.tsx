@@ -25,27 +25,25 @@ export default function Blog() {
 	};
 
 	return (
-		<>
+		<div className="grid grid-cols-1 p-4 md:grid-cols-3">
 			<div className="mb-4 flex gap-4">
-				<Link to={`${location.pathname}/new-post`}>
+				<Link to={`new-post`}>
 					<Button text={t("new post")} />
 				</Link>
-				<Link to={location.pathname + "/edit"}>
-					<Button text={t("edit blog")} />
-				</Link>
-				<Button text={t("delete blog")} bg="bg-red-500" handleClick={() => {}} />
 			</div>
 
 			{/* <h1 className="mb-2 text-4xl font-semibold">{blog.name}</h1>
 			<p className="max-w-prose">{blog.description}</p> */}
 
-			<PaginatedList totalItems={count} itemsPerPage={ITEMS_PER_PAGE} onChangePage={onChangePage}>
-				{posts.map((post) => (
-					<Link to={`${location.pathname}/${post.slug}`} key={post.id}>
-						<CardPost post={post} />
-					</Link>
-				))}
-			</PaginatedList>
-		</>
+			<div className="col-span-1 md:col-span-2">
+				<PaginatedList totalItems={count} itemsPerPage={ITEMS_PER_PAGE} onChangePage={onChangePage}>
+					{posts.map((post) => (
+						<Link to={`${location.pathname}/${post.slug}`} key={post.id}>
+							<CardPost post={post} />
+						</Link>
+					))}
+				</PaginatedList>
+			</div>
+		</div>
 	);
 }
