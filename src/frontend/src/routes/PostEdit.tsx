@@ -27,7 +27,8 @@ export default function PostEdit() {
 	const [featuredImage, setFeaturedImage] = useState<File | null>(null);
 	const [editMode, _setEditMode] = useState(data ? true : false);
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
 		const formData = new FormData();
 		formData.append("title", post.title);
 		formData.append("body", post.body);
@@ -65,7 +66,9 @@ export default function PostEdit() {
 		});
 	};
 
-	const generateSlug = () => {
+	const generateSlug = (clickEvent: React.MouseEvent) => {
+		clickEvent.preventDefault();
+		clickEvent.stopPropagation();
 		setPost({
 			...post,
 			slug: slugify(post.title, {
@@ -83,7 +86,7 @@ export default function PostEdit() {
 	return (
 		<>
 			<h1 className="mb-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{editMode ? t("edit post") : t("create post")}</h1>
-			<div className="flex w-full max-w-lg flex-col gap-4 rounded-md bg-white p-6">
+			<form onSubmit={handleSubmit} className="flex w-full max-w-lg flex-col gap-4 rounded-md bg-white p-6">
 				<div className="flex flex-col">
 					<label htmlFor="title">{t("title")}</label>
 					<input required onChange={handleChange} value={post.title} type="text" name="title" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -105,9 +108,9 @@ export default function PostEdit() {
 				<DropZoneImage onDrop={handleImageDrop} />
 
 				<div className="flex justify-end pt-6">
-					<Button text={editMode ? t("edit post") : t("create post")} handleClick={handleSubmit} />
+					<Button text={editMode ? t("edit post") : t("create post")} />
 				</div>
-			</div>
+			</form>
 		</>
 	);
 }
