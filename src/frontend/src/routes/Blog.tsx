@@ -25,7 +25,7 @@ export default function Blog() {
 	};
 
 	return (
-		<div className="grid grid-cols-1 p-4 md:grid-cols-3">
+		<div className="flex flex-col gap-4 p-4">
 			<div className="mb-4 flex gap-4">
 				<Link to={`new-post`}>
 					<Button text={t("new post")} />
