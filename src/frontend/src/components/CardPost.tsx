@@ -34,7 +34,7 @@ export default function CardPost(props: Props) {
 
 	return (
 		<Card>
-			<img className="h-64 rounded-t-md object-cover" src={image_url} alt="" />
+			<img className="h-48 rounded-t-md object-cover" src={image_url} alt="" />
 			<div className="max-w-sm  p-4">
 				<h2 className="mb-2 break-all text-xl font-semibold">{post.title}</h2>
 				<p className="text-sm text-stone-400">{DateTime.fromISO(post.created_at ?? "").toLocaleString({ day: "numeric", month: "long", year: "numeric" })}</p>
