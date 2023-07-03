@@ -9,19 +9,19 @@ Para instalar y ejecutar el proyecto, sigue los siguientes pasos:
 
 # Imágenes
 
-# Feed
+## Feed
 
 <img src="readme/feed_desktop.png" alt="Feed on desktop"/>
 <img src="readme/feed_tablet.png" height=600px alt="Feed on tablet"/>
 <img src="readme/feed_phone.png" height=600px alt="Feed on phone"/>
 
-# Post
+## Post
 
 <img src="readme/post_desktop.png" alt="Post on desktop"/>
 <img src="readme/post_tablet.png" height=600px alt="Post on tablet"/>
 <img src="readme/post_phone.png" height=600px alt="Post on phone"/>
 
-# New post
+## New post
 
 <img src="readme/new_desktop.png" alt="New post on"/>
 <img src="readme/new_tablet.png" height=600px alt="New post on"/>
