@@ -41,7 +41,7 @@ export default function Post() {
 					<div className="mb-4">
 						<p className="font-bold">{DateTime.fromISO(post.created_at ?? "").toLocaleString({ day: "numeric", month: "long", year: "numeric" })}</p>
 					</div>
-					<p>{post.body}</p>
+					<pre className="whitespace-pre-wrap font-sans">{post.body}</pre>
 				</div>
 			</div>
 		</>
