@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import usePost from "../hooks/usePost";
 
 export default function Blog() {
-	const { posts, getPosts, count } = usePost();
+	const { posts, getPosts, count, deletePost } = usePost();
 	const [page, setPage] = useState(1);
 
 	const ITEMS_PER_PAGE = 6;
@@ -40,7 +40,7 @@ export default function Blog() {
 					{posts.map((post) => (
 						<article key={post.id}>
 							<Link to={post.slug}>
-								<CardPost post={post} />
+								<CardPost post={post} deletePost={deletePost} />
 							</Link>
 						</article>
 					))}

@@ -3,7 +3,7 @@ import { Link, useLoaderData, useLocation, useNavigate, useParams } from "react-
 import { DateTime } from "luxon";
 import Button from "../components/Button";
 import { useTranslation } from "react-i18next";
-import { API_IMAGE, deletePost } from "../services/api";
+import { deletePost } from "../services/api";
 import { getImageUrl } from "../utils/postImage";
 
 export default function Post() {
