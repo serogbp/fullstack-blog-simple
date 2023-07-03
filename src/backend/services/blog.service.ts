@@ -92,7 +92,12 @@ export async function updatePost(req: Request, res: Response) {
 
 export async function deletePost(req: Request, res: Response) {
 	try {
-		//TODO
+		await query(
+			`DELETE FROM posts
+			WHERE slug = ?;
+		`,
+			[req.params.post_slug]
+		);
 		res.sendStatus(200);
 		// TODO borrar imagen relacionada con ese post
 	} catch (error) {

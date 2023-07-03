@@ -22,7 +22,7 @@ export default function Post() {
 					text={t("delete post")}
 					bg="bg-red-500"
 					handleClick={() => {
-						deletePost(params.blog_slug ?? "", params.post_slug ?? "").then(() => {
+						deletePost(params.post_slug ?? "").then(() => {
 							// TODO contemplar error al borrar
 							navigate(-1);
 						});

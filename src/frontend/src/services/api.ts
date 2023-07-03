@@ -58,7 +58,7 @@ export function updatePost(slug: string, formData: FormData) {
 	});
 }
 
-export function deletePost(blog_slug: string, post_slug: string) {
+export function deletePost(post_slug: string) {
 	return fetch(`${API}/post/${post_slug}`, {
 		method: "DELETE",
 	}).then(async (res) => {
