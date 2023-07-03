@@ -26,24 +26,26 @@ export default function Blog() {
 
 	return (
 		<div className="flex flex-col gap-4 p-4">
-			<div className="mb-4 flex gap-4">
+			<nav className="mb-4 flex gap-4">
 				<Link to={`new-post`}>
 					<Button text={t("new post")} />
 				</Link>
-			</div>
+			</nav>
 
 			{/* <h1 className="mb-2 text-4xl font-semibold">{blog.name}</h1>
 			<p className="max-w-prose">{blog.description}</p> */}
 
-			<div className="col-span-1 md:col-span-2">
+			<section className="col-span-1 md:col-span-2">
 				<PaginatedList totalItems={count} itemsPerPage={ITEMS_PER_PAGE} onChangePage={onChangePage}>
 					{posts.map((post) => (
-						<Link to={post.slug} key={post.id}>
-							<CardPost post={post} />
-						</Link>
+						<article key={post.id}>
+							<Link to={post.slug}>
+								<CardPost post={post} />
+							</Link>
+						</article>
 					))}
 				</PaginatedList>
-			</div>
+			</section>
 		</div>
 	);
 }
