@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { Post } from "../../../common/interfaces";
 import Card from "./Card";
 import { API_IMAGE } from "../services/api";
+import { getImageUrl } from "../utils/postImage";
 
 interface Props {
 	post: Post;
@@ -23,14 +24,7 @@ export default function CardPost(props: Props) {
 		excerpt = post.excerpt.length > 50 ? post.excerpt.substring(0, 50) + "..." : post.excerpt;
 	}
 
-	let image_url = "";
-	if (post.image_url === "") {
-		const length = 30;
-		const title = post.title.length > length ? post.title.substring(0, length) + "..." : post.title;
-		image_url = `https://placehold.co/600x400?text=${title}`;
-	} else {
-		image_url = API_IMAGE + post.image_url;
-	}
+	const image_url = getImageUrl(post.image_url ?? "", post.title);
 
 	return (
 		<Card>

@@ -4,6 +4,7 @@ import { DateTime } from "luxon";
 import Button from "../components/Button";
 import { useTranslation } from "react-i18next";
 import { API_IMAGE, deletePost } from "../services/api";
+import { getImageUrl } from "../utils/postImage";
 
 export default function Post() {
 	const post = useLoaderData() as Post;
@@ -11,6 +12,9 @@ export default function Post() {
 	const navigate = useNavigate();
 	const params = useParams();
 	const { t } = useTranslation();
+
+	const image_url = getImageUrl(post.image_url ?? "", post.title);
+
 	return (
 		<>
 			<div className="mb-4 flex gap-4">
@@ -30,13 +34,15 @@ export default function Post() {
 				/>
 			</div>
 
-			<div className="flex w-full max-w-3xl flex-grow flex-col gap-4 break-all rounded-md bg-white px-8 py-4 shadow-sm">
-				<img className="h-64 rounded-lg object-cover" src={API_IMAGE + post.image_url} alt="" />
-				<h1 className="mb-2 text-4xl font-semibold">{post.title}</h1>
-				<div className="mb-4">
-					<p className="font-bold">{DateTime.fromISO(post.created_at ?? "").toLocaleString({ day: "numeric", month: "long", year: "numeric" })}</p>
+			<div className="flex w-full max-w-3xl flex-grow flex-col gap-4 break-all rounded-md bg-white  shadow-sm">
+				<img className="h-64 rounded-t-md object-cover" src={image_url} alt="" />
+				<div className="px-8 py-4">
+					<h1 className="mb-2 text-4xl font-semibold">{post.title}</h1>
+					<div className="mb-4">
+						<p className="font-bold">{DateTime.fromISO(post.created_at ?? "").toLocaleString({ day: "numeric", month: "long", year: "numeric" })}</p>
+					</div>
+					<p>{post.body}</p>
 				</div>
-				<p>{post.body}</p>
 			</div>
 		</>
 	);
