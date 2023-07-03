@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { DropZoneImage } from "../components/DropZoneImage";
 import { FORM_DATA } from "../../../common/enums.ts";
 import { FileToBlob } from "../utils/imageHandler.ts";
+import { Textarea } from "@mantine/core";
 
 export default function PostEdit() {
 	const params = useParams();
@@ -89,20 +90,21 @@ export default function PostEdit() {
 			<form onSubmit={handleSubmit} className="flex w-full max-w-lg flex-col gap-4 rounded-md bg-white p-6">
 				<div className="flex flex-col">
 					<label htmlFor="title">{t("title")}</label>
-					<input required onChange={handleChange} value={post.title} type="text" name="title" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-				</div>
-				<div className="flex flex-col">
-					<label htmlFor="body">{t("body")}</label>
-					<textarea required onChange={handleChange} value={post.body} name="body" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+					<input required onChange={handleChange} value={post.title} type="text" name="title" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6" />
 				</div>
 				<div className="flex flex-col">
 					<label htmlFor="excerpt">{t("excerpt")}</label>
-					<input onChange={handleChange} value={post.excerpt} type="text" name="excerpt" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+					<input onChange={handleChange} value={post.excerpt} type="text" name="excerpt" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6" />
 				</div>
 				<div className="flex flex-col">
 					<label htmlFor="slug">{t("slug")}</label>
-					<input required onChange={handleChange} value={post.slug} type="text" name="slug" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+					<input required onChange={handleChange} value={post.slug} type="text" name="slug" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6" />
 					<button onClick={generateSlug}>{t("generate slug")}</button>
+				</div>
+
+				<div className="flex flex-col">
+					<label htmlFor="body">{t("body")}</label>
+					<Textarea autosize value={post.body} onChange={handleChange} name="body" />
 				</div>
 
 				<DropZoneImage onDrop={handleImageDrop} />
