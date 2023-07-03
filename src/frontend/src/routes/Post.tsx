@@ -30,7 +30,7 @@ export default function Post() {
 				/>
 			</div>
 
-			<div className="flex w-full max-w-3xl flex-grow flex-col gap-4 rounded-md bg-white px-8 py-4 shadow-sm">
+			<div className="flex w-full max-w-3xl flex-grow flex-col gap-4 break-all rounded-md bg-white px-8 py-4 shadow-sm">
 				<img className="h-64 rounded-lg object-cover" src={API_IMAGE + post.image_url} alt="" />
 				<h1 className="mb-2 text-4xl font-semibold">{post.title}</h1>
 				<div className="mb-4">

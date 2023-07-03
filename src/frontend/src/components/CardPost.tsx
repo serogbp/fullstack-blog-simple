@@ -8,12 +8,22 @@ interface Props {
 }
 
 export default function CardPost(props: Props) {
+	const post = props.post as Post;
+
+	let excerpt = "";
+
+	if (!post.excerpt || post.excerpt === "") {
+		excerpt = post.body.length > 50 ? post.body.substring(0, 50) + "..." : post.body;
+	} else {
+		excerpt = post.excerpt.length > 50 ? post.excerpt.substring(0, 50) + "..." : post.excerpt;
+	}
+
 	return (
 		<Card>
-			{props.post.image_url && <img className="h-64 rounded-lg object-cover" src={API_IMAGE + props.post.image_url} alt="" />}
-			<h2 className="mb-2 text-xl font-semibold">{props.post.title}</h2>
-			<p className="text-sm text-stone-400">{DateTime.fromISO(props.post.created_at ?? "").toLocaleString({ day: "numeric", month: "long", year: "numeric" })}</p>
-			<p>{props.post.excerpt}</p>
+			{post.image_url && <img className="h-64 rounded-lg object-cover" src={API_IMAGE + post.image_url} alt="" />}
+			<h2 className="mb-2 break-all text-xl font-semibold">{post.title}</h2>
+			<p className="text-sm text-stone-400">{DateTime.fromISO(post.created_at ?? "").toLocaleString({ day: "numeric", month: "long", year: "numeric" })}</p>
+			<p>{excerpt}</p>
 		</Card>
 	);
 }
