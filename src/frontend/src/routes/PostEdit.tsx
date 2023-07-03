@@ -12,7 +12,7 @@ import { FORM_DATA } from "../../../common/enums.ts";
 export default function PostEdit() {
 	const params = useParams();
 	const navigate = useNavigate();
-	const { isOwner, post: data } = useLoaderData() as { isOwner: boolean; post: Post };
+	const data = useLoaderData() as Post;
 	const { t } = useTranslation();
 
 	const [post, setPost] = useState<Post>(
@@ -21,7 +21,6 @@ export default function PostEdit() {
 			body: "",
 			excerpt: "",
 			slug: "",
-			visibility: "public",
 		}
 	);
 	const [originalPost, _setOriginalPost] = useState<Post>(data ?? { slug: "" });
@@ -34,8 +33,6 @@ export default function PostEdit() {
 		formData.append("body", post.body);
 		formData.append("excerpt", post.excerpt ?? "");
 		formData.append("slug", post.slug);
-		formData.append("visibility", post.visibility);
-		formData.append("blog_slug", params.blog_slug ?? "");
 		formData.append("image_url", post.image_url ?? "");
 
 		if (featuredImage !== null && featuredImage !== undefined) {
@@ -46,8 +43,8 @@ export default function PostEdit() {
 
 		if (editMode) {
 			// TODO handle errores fetch
-			updatePost(params.blog_slug ?? "", originalPost.slug, formData).then(() => {
-				navigate(`/${params.blog_slug}/${post.slug}`, { replace: true });
+			updatePost(originalPost.slug, formData).then(() => {
+				navigate(`/${post.slug}`, { replace: true });
 			});
 		} else {
 			// TODO handle errores fetch
@@ -126,10 +123,6 @@ export default function PostEdit() {
 					<label htmlFor="slug">{t("slug")}</label>
 					<input onChange={handleChange} value={post.slug} type="text" name="slug" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 					<button onClick={generateSlug}>{t("generate slug")}</button>
-				</div>
-				<div className="flex flex-col">
-					<label htmlFor="visibility">{t("visibility")}</label>
-					<input onChange={handleChange} value={post.visibility} type="text" name="visibility" className="mt-2 block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
 				</div>
 
 				<DropZoneImage onDrop={handleImageDrop} />

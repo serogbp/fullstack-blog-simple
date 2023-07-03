@@ -78,13 +78,9 @@ export async function updatePost(req: Request, res: Response) {
 		const post = req.body;
 		query(
 			`
-			UPDATE posts SET image_url=?, title=?, body=?, excerpt=?, slug=?, visibility=?
-			WHERE blog_id = (
-				SELECT id
-				FROM blogs
-				WHERE slug = ?
-			) AND slug = ?;`,
-			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.visibility, post.blog_slug, post.slug]
+			UPDATE posts SET image_url=?, title=?, body=?, excerpt=?, slug=?
+			WHERE slug = ?;`,
+			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.slug]
 		);
 		res.sendStatus(200);
 	} catch (error) {

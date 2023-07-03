@@ -17,13 +17,11 @@ export interface Blog {
 
 export interface Post {
 	id?: string;
-	blog_id?: string;
 	image_url?: string;
 	title: string;
 	body: string;
 	excerpt?: string;
 	slug: string;
-	visibility: string;
 	created_at?: string;
 }
 
