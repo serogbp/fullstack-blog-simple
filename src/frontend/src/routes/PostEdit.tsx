@@ -33,6 +33,9 @@ export default function PostEdit() {
 		formData.append("body", post.body);
 		formData.append("excerpt", post.excerpt ?? "");
 		formData.append("slug", post.slug);
+		if (params.post_slug) {
+			formData.append("original_slug", params.post_slug);
+		}
 		formData.append("image_url", post.image_url ?? "");
 
 		if (featuredImage !== null && featuredImage !== undefined) {

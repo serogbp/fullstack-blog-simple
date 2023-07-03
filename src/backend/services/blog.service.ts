@@ -83,9 +83,9 @@ export async function updatePost(req: Request, res: Response) {
 		const post = req.body;
 		await query(
 			`
-			UPDATE posts SET image_url=?, title=?, body=?, excerpt=?, slug=?
+			UPDATE posts SET image_url=?, title=?, body=?, excerpt=COALESCE(NULLIF(?, ""), ""), slug=?
 			WHERE slug = ?;`,
-			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.slug]
+			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.original_slug ?? post.slug]
 		);
 		res.sendStatus(200);
 		// TODO borrar imagene si post.image_url es !== ''
