@@ -83,6 +83,7 @@ export async function updatePost(req: Request, res: Response) {
 			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.slug]
 		);
 		res.sendStatus(200);
+		// TODO borrar imagene si post.image_url es !== ''
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -93,7 +94,7 @@ export async function deletePost(req: Request, res: Response) {
 	try {
 		//TODO
 		res.sendStatus(200);
-		// TODO borrar imagenes relacionadas con ese post
+		// TODO borrar imagen relacionada con ese post
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);

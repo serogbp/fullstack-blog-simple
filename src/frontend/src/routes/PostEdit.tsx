@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Post } from "../../../common/interfaces";
 import slugify from "slugify";
-import { useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { createPost, updatePost } from "../services/api";
-import Layout from "../layouts/Layout";
 import Button from "../components/Button";
 import { useTranslation } from "react-i18next";
 import { DropZoneImage } from "../components/DropZoneImage";
 import { FORM_DATA } from "../../../common/enums.ts";
+import { FileToBlob } from "../utils/imageHandler.ts";
 
 export default function PostEdit() {
 	const params = useParams();
@@ -36,8 +36,7 @@ export default function PostEdit() {
 		formData.append("image_url", post.image_url ?? "");
 
 		if (featuredImage !== null && featuredImage !== undefined) {
-			const imageDataUrl = await readFileAsDataURL(featuredImage);
-			const blob = dataURLToBlob(imageDataUrl);
+			const blob = await FileToBlob(featuredImage);
 			formData.append(FORM_DATA.IMAGE, blob);
 		}
 
@@ -61,31 +60,6 @@ export default function PostEdit() {
 			...post,
 			[inputName]: inputValue,
 		});
-	};
-
-	const readFileAsDataURL = (file: File): Promise<string> => {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.onload = () => {
-				resolve(reader.result as string);
-			};
-			reader.onerror = () => {
-				reject(new Error("Error al leer el archivo"));
-			};
-			reader.readAsDataURL(file);
-		});
-	};
-
-	const dataURLToBlob = (dataURL: string): Blob => {
-		const arr = dataURL.split(",");
-		const mime = arr[0].match(/:(.*?);/)![1];
-		const bstr = atob(arr[1]);
-		let n = bstr.length;
-		const u8arr = new Uint8Array(n);
-		while (n--) {
-			u8arr[n] = bstr.charCodeAt(n);
-		}
-		return new Blob([u8arr], { type: mime });
 	};
 
 	const generateSlug = () => {
