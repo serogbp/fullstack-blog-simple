@@ -1,6 +1,27 @@
 import { Request, Response } from "express";
 import { query } from "./db.service.ts";
 
+interface PostCount {
+	total_posts: number;
+}
+
+export async function getPostsCount(req: Request, res: Response) {
+	try {
+		const [rows] = await query(
+			`
+			SELECT COUNT(*) AS total_posts
+			FROM posts;
+		`
+		);
+		const result = rows as PostCount[];
+
+		res.status(200).json(result[0].total_posts);
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+}
+
 export async function getPosts(req: Request, res: Response) {
 	try {
 		const itemsPerPage: number = parseInt(req.query.itemsPerPage as string) || 10;

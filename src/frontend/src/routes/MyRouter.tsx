@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import NotFound from "./NotFound";
-import { getPost, getPosts } from "../services/api";
+import { getPost, getPosts, getPostsCount } from "../services/api";
 import Blog from "./Blog";
 import Post from "./Post";
 import PostEdit from "./PostEdit";
@@ -9,15 +9,22 @@ import Root from "./Root";
 
 const router = createBrowserRouter([
 	{
-		path: "/",
 		element: <Root />,
-
 		errorElement: <NotFound />,
 		children: [
 			{
 				path: "/",
 				element: <Blog />,
-				loader: getPosts,
+
+				// loader: async () => {
+				// 	const count = await getPostsCount();
+				// 	const posts = await getPosts(2, 1);
+
+				// 	return {
+				// 		count,
+				// 		posts,
+				// 	};
+				// },
 			},
 
 			{

@@ -1,8 +1,19 @@
 const API = "http://localhost:3001";
 export const API_IMAGE = "http://localhost:3001/image/";
 
-export function getPosts() {
-	return fetch(`${API}/post`).then(async (res) => {
+export function getPostsCount() {
+	return fetch(`${API}/post/count`).then(async (res) => {
+		if (res.status === 200) {
+			const data = await res.json();
+			return data;
+		} else {
+			throw res;
+		}
+	});
+}
+
+export function getPosts(itemsPerPage: number, page: number) {
+	return fetch(`${API}/post?itemsPerPage=${itemsPerPage}&page=${page}`).then(async (res) => {
 		if (res.status === 200) {
 			const data = await res.json();
 			return data;

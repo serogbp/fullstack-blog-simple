@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { createPost, deletePost, getPost, getPosts, updatePost } from "../services/blog.service.ts";
+import { createPost, deletePost, getPost, getPosts, getPostsCount, updatePost } from "../services/blog.service.ts";
 import uploadImage from "../multer/uploadImage.ts";
 
 const blogRouter = Router();
+
+blogRouter.route("/post/count").get(getPostsCount);
 
 blogRouter
 	.route("/post/")
