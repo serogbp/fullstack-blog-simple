@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { query } from "./db.service.ts";
+import { Post } from "../../common/interfaces.ts";
 
 interface PostCount {
 	total_posts: number;
@@ -46,7 +47,16 @@ export async function getPosts(req: Request, res: Response) {
 
 export async function getPost(req: Request, res: Response) {
 	try {
-		//TODO
+		const [rows] = await query(
+			`
+		SELECT *
+		FROM posts
+		WHERE slug = ?;
+		`,
+			[req.params.post_slug]
+		);
+		const result = rows as Post[];
+		res.status(200).json(result[0]);
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);

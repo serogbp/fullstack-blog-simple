@@ -15,18 +15,7 @@ const router = createBrowserRouter([
 			{
 				path: "/",
 				element: <Blog />,
-
-				// loader: async () => {
-				// 	const count = await getPostsCount();
-				// 	const posts = await getPosts(2, 1);
-
-				// 	return {
-				// 		count,
-				// 		posts,
-				// 	};
-				// },
 			},
-
 			{
 				path: "/new-post",
 				element: <PostEdit />,

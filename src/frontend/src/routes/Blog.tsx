@@ -38,7 +38,7 @@ export default function Blog() {
 			<div className="col-span-1 md:col-span-2">
 				<PaginatedList totalItems={count} itemsPerPage={ITEMS_PER_PAGE} onChangePage={onChangePage}>
 					{posts.map((post) => (
-						<Link to={`${location.pathname}/${post.slug}`} key={post.id}>
+						<Link to={post.slug} key={post.id}>
 							<CardPost post={post} />
 						</Link>
 					))}
