@@ -34,8 +34,8 @@ export function getPost(slug: string) {
 	});
 }
 
-export function createPost(slug: string, formData: FormData) {
-	return fetch(`${API}/post/${slug}`, {
+export function createPost(formData: FormData) {
+	return fetch(`${API}/post/`, {
 		method: "POST",
 		body: formData,
 	}).then(async (res) => {

@@ -65,7 +65,12 @@ export async function getPost(req: Request, res: Response) {
 
 export async function createPost(req: Request, res: Response) {
 	try {
-		// TODO
+		const post = req.body;
+		await query(
+			`
+		INSERT INTO posts (image_url, title, body, excerpt, slug) VALUES (?, ?, ?, ?, ?);`,
+			[post.image_url, post.title, post.body, post.excerpt, post.slug]
+		);
 		res.sendStatus(200);
 	} catch (error) {
 		console.log(error);
@@ -76,7 +81,7 @@ export async function createPost(req: Request, res: Response) {
 export async function updatePost(req: Request, res: Response) {
 	try {
 		const post = req.body;
-		query(
+		await query(
 			`
 			UPDATE posts SET image_url=?, title=?, body=?, excerpt=?, slug=?
 			WHERE slug = ?;`,
