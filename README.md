@@ -10,9 +10,13 @@ Para instalar y ejecutar el proyecto, sigue los siguientes pasos:
 ## .env
 
 PORT=3001
+
 HOST=localhost
+
 USER=root
+
 DATABASE=gestion_blogs
+
 JWT_TOKEN=secret
 
 # Imágenes
