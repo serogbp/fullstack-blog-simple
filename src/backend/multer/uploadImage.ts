@@ -1,5 +1,5 @@
 import multer from "multer";
-import path from "path";
+import fs from "fs";
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -20,3 +20,13 @@ const storage = multer.diskStorage({
 const uploadImage = multer({ storage });
 
 export default uploadImage;
+
+export function deleteImageFromServer(filename: string) {
+	const url = new URL("../public/image", import.meta.url);
+	const folder = url.pathname.substring(1);
+	fs.unlink(`${folder}/${filename}`, (err) => {
+		if (err) {
+			console.log(err);
+		}
+	});
+}

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { query } from "./db.service.ts";
 import { Post } from "../../common/interfaces.ts";
+import { deleteImageFromServer } from "../multer/uploadImage.ts";
 
 interface PostCount {
 	total_posts: number;
@@ -81,6 +82,12 @@ export async function createPost(req: Request, res: Response) {
 export async function updatePost(req: Request, res: Response) {
 	try {
 		const post = req.body;
+
+		// Si se cambia la imagen, borrar del servidor la antigua
+		if (post.image_url !== "") {
+			deletePostImage(post.slug);
+		}
+
 		await query(
 			`
 			UPDATE posts SET image_url=?, title=?, body=?, excerpt=COALESCE(NULLIF(?, ""), ""), slug=?
@@ -88,7 +95,6 @@ export async function updatePost(req: Request, res: Response) {
 			[post.image_url, post.title, post.body, post.excerpt, post.slug, post.original_slug ?? post.slug]
 		);
 		res.sendStatus(200);
-		// TODO borrar imagene si post.image_url es !== ''
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -97,6 +103,8 @@ export async function updatePost(req: Request, res: Response) {
 
 export async function deletePost(req: Request, res: Response) {
 	try {
+		await deletePostImage(req.params.post_slug);
+
 		await query(
 			`DELETE FROM posts
 			WHERE slug = ?;
@@ -104,9 +112,26 @@ export async function deletePost(req: Request, res: Response) {
 			[req.params.post_slug]
 		);
 		res.sendStatus(200);
-		// TODO borrar imagen relacionada con ese post
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
+	}
+}
+
+async function deletePostImage(post_slug: string) {
+	try {
+		const [rows] = await query(
+			`
+			SELECT image_url
+			FROM posts
+			WHERE slug = ?;
+			`,
+			[post_slug]
+		);
+		const result = rows as { image_url: string }[];
+		const image_url = result[0].image_url;
+		deleteImageFromServer(image_url);
+	} catch (error) {
+		console.log(error);
 	}
 }
